@@ -14,6 +14,14 @@ datocms_api_key = Application.fetch_env!(:my_app, :api_key)
 DatoCMS.GraphQLClient.configure(api_key: datocms_api_key)
 ```
 
+# Environments
+If you've multiple DatoCMS environment you can control which one we'll fetch data from by using the :environment keyword.
+Example:
+```elixir
+datocms_api_key = Application.fetch_env!(:my_app, :api_key)
+DatoCMS.GraphQLClient.configure(api_key: datocms_api_key, environment: "stage")
+```
+
 # Queries
 
 * single items: `DatoCMS.GraphQLClient.fetch!(:foo, "{ bar }").bar`,

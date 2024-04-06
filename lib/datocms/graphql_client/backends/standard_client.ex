@@ -19,6 +19,12 @@ defmodule DatoCMS.GraphQLClient.Backends.StandardClient do
       Neuron.Config.set(headers: [authorization: "Bearer #{api_key}"])
     end
 
+    if Keyword.has_key?(config, :environment) do
+      headers = Neuron.Config.get(:headers)
+      environment = config[:environment]
+      Neuron.Config.set(headers: headers ++ ["X-Environment": "#{environment}"])
+    end
+
     Neuron.Config.set(connection_opts: [timeout: :infinity, recv_timeout: :infinity])
     Neuron.Config.set(parse_options: [keys: :atoms])
   end
